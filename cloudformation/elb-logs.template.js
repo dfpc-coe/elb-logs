@@ -64,5 +64,14 @@ export default cf.merge({
                 ELBAccount: '797873946194',
             }
         }
+    },
+    Outputs: {
+        LogBucket: {
+            Description: 'ELB Log Bucket',
+            Export: {
+                Name: cf.join([cf.stackName, '-bucket'])
+            },
+            Value: cf.ref('LogBucket')
+        },
     }
 });
