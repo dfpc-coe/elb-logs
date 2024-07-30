@@ -1,0 +1,32 @@
+{
+    "name": "@tak-ps/elb-logs",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "Store ELB Access logs in a centralized bucket",
+    "scripts": {
+        "lint": "eslint cloudformation/*.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "engines": {
+        "node": ">= 18"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dfpc-coe/elb-logs.git"
+    },
+    "author": "Nick Ingalls <nick@ingalls.ca>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dfpc-coe/elb-logs/issues"
+    },
+    "homepage": "https://github.com/dfpc-coe/elb-logs#readme",
+    "dependencies": {
+        "@openaddresses/cloudfriend": "^7.0.0",
+        "@openaddresses/deploy": "^7.5.0",
+        "aws-sdk": "^2.1264.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.9.0",
+        "eslint-plugin-node": "^11.1.0"
+    }
+}

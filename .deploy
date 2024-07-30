@@ -1,0 +1,15 @@
+{
+    "name": "coe-elb-logs",
+    "profile": "coegc",
+    "region": "us-gov-east-1",
+    "tags": [
+        {
+            "Key": "Project",
+            "Value": "elb-logs"
+        },
+        "Owner",
+        "Client"
+    ],
+    "artifacts": {
+    }
+}
