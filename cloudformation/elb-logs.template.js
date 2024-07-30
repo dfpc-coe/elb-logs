@@ -46,10 +46,10 @@ export default cf.merge({
     Mappings: {
         ELBRegion: {
             "us-gov-east-1": {
-                ELBAccount: '048591011584'
+                ELBAccount: '190560391635'
             },
             "us-gov-west-1": {
-                ELBAccount: '190560391635'
+                ELBAccount: '048591011584'
             },
             "us-east-1": {
                 ELBAccount: '127311923021',

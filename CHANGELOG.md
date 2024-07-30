@@ -12,6 +12,11 @@
 
 ### Pending Release
 
+### v1.0.1
+
+- :bug: Flip gov region ELB Account IDs
+
+
 ### v1.0.0
 
 - :rocket: Initial Bucket config & Policy
