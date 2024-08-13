@@ -1,7 +1,7 @@
 {
     "name": "@tak-ps/elb-logs",
     "type": "module",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Store ELB Access logs in a centralized bucket",
     "scripts": {
         "lint": "eslint cloudformation/*.js",
