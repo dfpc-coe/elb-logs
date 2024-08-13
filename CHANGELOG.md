@@ -12,6 +12,10 @@
 
 ### Pending Release
 
+### v1.1.0
+
+- :arrow_up: Update core deps
+
 ### v1.0.1
 
 - :bug: Flip gov region ELB Account IDs

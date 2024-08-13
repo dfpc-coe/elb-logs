@@ -22,7 +22,7 @@
     "homepage": "https://github.com/dfpc-coe/elb-logs#readme",
     "dependencies": {
         "@openaddresses/cloudfriend": "^7.0.0",
-        "@openaddresses/deploy": "^7.5.0",
+        "@openaddresses/deploy": "^8.0.0",
         "aws-sdk": "^2.1264.0"
     },
     "devDependencies": {
