@@ -36,6 +36,43 @@ export default cf.merge({
                             },
                             Action: 's3:PutObject',
                             Resource: cf.join([cf.getAtt('LogBucket', 'Arn'), '/*'])
+                        },{
+                            Effect: "Allow",
+                            Principal: {
+                                Service: "delivery.logs.amazonaws.com"
+                            },
+                            Action: "s3:GetBucketAcl",
+                            Resource: [
+                                cf.join([cf.getAtt('LogBucket', 'Arn')]),
+                                cf.join([cf.getAtt('LogBucket', 'Arn'), '/*'])
+                            ],
+                            Condition: {
+                                StringEquals: {
+                                    'aws:SourceAccount': cf.accountId
+                                },
+                                ArnLike: {
+                                    'aws:SourceArn': cf.join(['arn:', cf.partition, ':logs:', cf.region, ':', cf.accountId, ':*'])
+                                }
+                            }
+                        },{
+                            Effect: 'Allow',
+                            Principal: {
+                                Service: 'delivery.logs.amazonaws.com'
+                            },
+                            Action: 's3:PutObject',
+                            Resource: [
+                                cf.join([cf.getAtt('LogBucket', 'Arn')]),
+                                cf.join([cf.getAtt('LogBucket', 'Arn'), '/*'])
+                            ],
+                            Condition: {
+                                StringEquals: {
+                                    's3:x-amz-acl': "bucket-owner-full-control",
+                                    'aws:SourceAccount': cf.accountId
+                                },
+                                ArnLike: {
+                                    'aws:SourceArn': cf.join(['arn:', cf.partition, ':logs:', cf.region, ':', cf.accountId, ':*'])
+                                }
+                            }
                         }
                     ]
                 }

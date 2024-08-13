@@ -12,6 +12,10 @@
 
 ### Pending Release
 
+### v1.2.0
+
+- :tada: Add Network ELB support
+
 ### v1.1.0
 
 - :arrow_up: Update core deps
