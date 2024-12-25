@@ -6,7 +6,7 @@ export default cf.merge({
         GitSha: {
             Description: 'GitSha that is currently being deployed',
             Type: 'String'
-        },
+        }
     },
     Resources: {
         LogBucket: {
@@ -27,21 +27,21 @@ export default cf.merge({
             Properties: {
                 Bucket: cf.ref('LogBucket'),
                 PolicyDocument: {
-                    Version: "2012-10-17",
+                    Version: '2012-10-17',
                     Statement: [
                         {
-                            Effect: "Allow",
+                            Effect: 'Allow',
                             Principal: {
                                 AWS: cf.join(['arn:', cf.partition, ':iam::', cf.findInMap('ELBRegion', cf.region, 'ELBAccount'), ':root'])
                             },
                             Action: 's3:PutObject',
                             Resource: cf.join([cf.getAtt('LogBucket', 'Arn'), '/*'])
                         },{
-                            Effect: "Allow",
+                            Effect: 'Allow',
                             Principal: {
-                                Service: "delivery.logs.amazonaws.com"
+                                Service: 'delivery.logs.amazonaws.com'
                             },
-                            Action: "s3:GetBucketAcl",
+                            Action: 's3:GetBucketAcl',
                             Resource: [
                                 cf.join([cf.getAtt('LogBucket', 'Arn')]),
                                 cf.join([cf.getAtt('LogBucket', 'Arn'), '/*'])
@@ -66,7 +66,7 @@ export default cf.merge({
                             ],
                             Condition: {
                                 StringEquals: {
-                                    's3:x-amz-acl': "bucket-owner-full-control",
+                                    's3:x-amz-acl': 'bucket-owner-full-control',
                                     'aws:SourceAccount': cf.accountId
                                 },
                                 ArnLike: {
@@ -82,23 +82,23 @@ export default cf.merge({
     // This is necessary due to: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html
     Mappings: {
         ELBRegion: {
-            "us-gov-east-1": {
+            'us-gov-east-1': {
                 ELBAccount: '190560391635'
             },
-            "us-gov-west-1": {
+            'us-gov-west-1': {
                 ELBAccount: '048591011584'
             },
-            "us-east-1": {
-                ELBAccount: '127311923021',
+            'us-east-1': {
+                ELBAccount: '127311923021'
             },
-            "us-east-2": {
-                ELBAccount: '033677994240',
+            'us-east-2': {
+                ELBAccount: '033677994240'
             },
-            "us-west-1": {
-                ELBAccount: '027434742980',
+            'us-west-1': {
+                ELBAccount: '027434742980'
             },
-            "us-west-2": {
-                ELBAccount: '797873946194',
+            'us-west-2': {
+                ELBAccount: '797873946194'
             }
         }
     },
@@ -109,6 +109,6 @@ export default cf.merge({
                 Name: cf.join([cf.stackName, '-bucket'])
             },
             Value: cf.ref('LogBucket')
-        },
+        }
     }
 });
