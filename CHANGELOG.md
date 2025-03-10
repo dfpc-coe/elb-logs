@@ -14,7 +14,7 @@
 
 ### v1.4.0
 
-- :rocket: Complete map of AccountIDs as well as fallback to the new style principal for newly created accounts
+- :rocket: Complete map of AccountIDs as well as fallback to the new style principal for newly created regions
 
 ### v1.3.0
 
