@@ -12,6 +12,10 @@
 
 ### Pending Release
 
+### v1.4.0
+
+- :rocket: Complete map of AccountIDs as well as fallback to the new style principal for newly created accounts
+
 ### v1.3.0
 
 - :rocket: Update deps & ESLint Config
