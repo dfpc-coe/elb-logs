@@ -2,6 +2,7 @@ import cf from '@openaddresses/cloudfriend';
 
 export default cf.merge({
     Description: 'Template for @tak-ps/elb-logs',
+    Transform: "AWS::LanguageExtensions",
     Parameters: {
         GitSha: {
             Description: 'GitSha that is currently being deployed',
@@ -32,7 +33,22 @@ export default cf.merge({
                         {
                             Effect: 'Allow',
                             Principal: {
-                                AWS: cf.join(['arn:', cf.partition, ':iam::', cf.findInMap('ELBRegion', cf.region, 'ELBAccount'), ':root'])
+                                AWS: cf.if(
+                                    'OldPrincipal',
+                                    cf.join([
+                                        'arn:',
+                                        cf.partition,
+                                        ':iam::',
+                                        { 'Fn::FindInMap': [ 'ELBRegion', cf.region, 'ELBAccount', { DefaultValue: 'DEFAULT' }] },
+                                        ':root'
+                                    ]),
+                                    cf.noValue
+                                ),
+                                Service: cf.if(
+                                    'NewPrincipal',
+                                    'logdelivery.elasticloadbalancing.amazonaws.com',
+                                    cf.noValue
+                                )
                             },
                             Action: 's3:PutObject',
                             Resource: cf.join([cf.getAtt('LogBucket', 'Arn'), '/*'])
@@ -79,6 +95,19 @@ export default cf.merge({
             }
         }
     },
+    Conditions: {
+        OldPrincipal: cf.notEquals({
+            'Fn::FindInMap': [ 'ELBRegion', cf.region, 'ELBAccount', {
+                DefaultValue: 'DEFAULT'
+            }]
+        }, 'DEFAULT'),
+        NewPrincipal: cf.equals({
+            'Fn::FindInMap': [ 'ELBRegion', cf.region, 'ELBAccount', {
+                DefaultValue: 'DEFAULT'
+            }]
+        }, 'DEFAULT')
+    },
+
     // This is necessary due to: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html
     Mappings: {
         ELBRegion: {
@@ -154,6 +183,7 @@ export default cf.merge({
             'sa-east-1': {                      // South America (São Paulo)
                 ELBAccount: '507241528517'
             }
+        }
     },
     Outputs: {
         LogBucket: {
