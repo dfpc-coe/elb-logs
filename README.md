@@ -2,6 +2,9 @@
 
 <p align=center>Store ELB Access logs in a centralized bucket</p>
 
+> [!CAUTION]
+> This repo has been retired and is now incorporated into the dfpc-coe/vpc codebase
+
 ## Installation
 
 Local installation can be performed via the following
